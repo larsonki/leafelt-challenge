@@ -68,25 +68,21 @@ d3.json(url).then(function (response) {
         radius: Math.sqrt(magnitude) * 5
       }).bindPopup(`<h3>${place}</h3><hr><p>${new Date(time)}\n<p>Magnitude: ${magnitude}\n<p>Depth: 
                     ${location.coordinates[2]}`).addTo(myMap);
-      // console.log(color)
     };
   };
 });
-// var geojsonMarker = {
-//     radius: location.coordinates[2],
-//     fillColor: "#ff7800",
-//     color: "#000",
-//     weight: 1,
-//     opacity: 1,
-//     fillOpacity: 0.8
-// };
 
-// L.geoJSON(someGeojsonFeature, {
-//     pointToLayer: function (feature, latlng) {
-//         return L.circleMarker(latlng, geojsonMarkerOptions);
-//     }
-// }).addTo(map);
+var mapStyle = {
+  color: "orange",
+  fillOpacity: 0
+};
 
+var platesUrl = 'https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json'
 
+d3.json(platesUrl).then(function (response) {
+  L.geoJSON(response, {
+    style: mapStyle
+  }).addTo(myMap);
+});
 
 
